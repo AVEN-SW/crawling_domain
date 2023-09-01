@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="executionMode" value="BINARY" />
+    <option name="pathToExecutable" value="$PROJECT_DIR$/../opt/anaconda3/bin/black" />
+    <option name="sdkUUID" value="25f08b3e-5119-45a8-adde-b92b72cd7ed2" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (flask_practice)" project-jdk-type="Python SDK" />
+</project>
