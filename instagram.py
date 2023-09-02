@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver as wb
-from selenium.webdriver.common.by import By 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -66,10 +66,14 @@ class InstaCrawling:
 
 
             for i in range(len(thumb_img_list)):
+
+                # 썸네일 클릭
                 thumb_img = thumb_img_list[i]
                 thumb_img.click()
-                time.sleep(2)  # 적절한 대기 시간을 설정하세요.
+                time.sleep(2)
 
+
+                # 모달창 엘리먼트 가져오기
                 article = driver.find_element(By.CSS_SELECTOR,'article._aatb._aate._aatg._aati')
 
                 try:

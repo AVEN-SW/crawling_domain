@@ -17,13 +17,23 @@ db = pymysql.connect(
 def save_feed():
     crawler = instagram.InstaCrawling()
     img_urls, video_urls = crawler.crawling()
-    print(video_urls)
-    pk_id = 1
+
 
 
     cur = db.cursor()
-    sql = 'insert into insta_feed values (%s, %s, %s)'
-    cur.execute(sql, ('2022-05-05', video_urls[0], '작성자'))
+    select_sql = 'select * from insta_feed'
+    cur.execute(select_sql)
+    result = cur.fetchall()
+
+    result_url = []
+    for i in range(len(result)):
+        result_url.append(result[i][3])
+
+    new_url = [x for x in video_urls if x not in result_url]
+
+
+    insert_sql = 'insert into insta_feed(created_At, file_url, writer) values (%s, %s, %s)'
+    cur.execute(insert_sql, ('2022-05-05', new_url, '작성자'))
     db.commit()
     db.close()
 
