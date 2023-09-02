@@ -13,7 +13,9 @@ class InstaCrawling:
         self.pw = '@tkaruqtkf92'
         self.video_url = []
         self.img_url = []
-        
+        self.video_date = []
+        self.img_date = []
+        self.writer = []
 
     def crawling(self):
         driver = wb.Safari()
@@ -87,10 +89,20 @@ class InstaCrawling:
                             video = driver.find_element(By.TAG_NAME, 'video').get_attribute('src')
                             self.video_url.append(video)
 
+                            date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
+                            self.video_date.append(date)
+
+                            writer_id = driver.find_element(By.CLASS_NAME, '/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
+                            self.writer.append(writer_id)
                         except:
                             img = driver.find_element(By.TAG_NAME, 'img').get_attribute('src')
                             self.img_url.append(img)
 
+                            date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
+                            self.img_date.append(date)
+
+                            writer_id = driver.find_element(By.CLASS_NAME, '/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
+                            self.writer.append(writer_id)
                         next_btn.click()
                         time.sleep(1)
 
@@ -104,14 +116,25 @@ class InstaCrawling:
                     video = driver.find_element(By.TAG_NAME, 'video').get_attribute('src')
                     self.video_url.append(video)
 
+                    date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
+                    self.video_date.append(date)
+
+                    writer_id = driver.find_element(By.CLASS_NAME,'/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
+                    self.writer.append(writer_id)
                 except:
                     img = driver.find_element(By.TAG_NAME, 'img').get_attribute('src')
                     self.img_url.append(img)
 
+                    date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
+                    self.img_date.append(date)
+
+                    writer_id = driver.find_element(By.CLASS_NAME,'/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
+                    self.writer.append(writer_id)
                 time.sleep(2)
                 driver.back()
 
         driver.quit()
-        return self.img_url, self.video_url
+
+        return self.img_url, self.video_url, self.img_date, self.video_date, self.writer
 
         
