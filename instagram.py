@@ -20,6 +20,7 @@ class InstaCrawling:
         driver.get('https://www.instagram.com/')
         driver.maximize_window()
 
+        # 로그인
         time.sleep(1)
         input_id = driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input')
         input_pw = driver.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input')
@@ -38,6 +39,7 @@ class InstaCrawling:
         alert_set = driver.find_element(By.CLASS_NAME,'_a9--._a9_1')
         alert_set.click()
 
+        # 프로필 접근
         time.sleep(3)
         profile_btn_list = driver.find_elements(By.CLASS_NAME,'x1lliihq.x193iq5w.x6ikm8r.x10wlt62.xlyipyv.xuxw1ft')
 
@@ -47,6 +49,7 @@ class InstaCrawling:
 
         profile_btn.click()
 
+        # 태그된 게시물 접근
         time.sleep(5)
         taged_btn_list = driver.find_elements(By.CLASS_NAME,'x6umtig.x1b1mbwd.xaqea5y.xav7gou.xk390pu.xdj266r.x11i5rnm.xat24cr.x1mnrxsn.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x11njtxf')
 
@@ -76,6 +79,7 @@ class InstaCrawling:
                 # 모달창 엘리먼트 가져오기
                 article = driver.find_element(By.CSS_SELECTOR,'article._aatb._aate._aatg._aati')
 
+                # 피드에 사진이나 영상이 하나 이상일때(다음을 나타내는 화살표 버튼이 있을때) 영상이나 이미지 url 가져오기
                 try:
                     while driver.find_element(By.CSS_SELECTOR,'button._afxw._al46._al47'):
                         next_btn = driver.find_element(By.CSS_SELECTOR,'button._afxw._al46._al47')
@@ -95,6 +99,7 @@ class InstaCrawling:
                 except:
                     pass
 
+                # 영상이나 이미지가 하나만 존재하는 피드일때 url 가져오기
                 try:
                     video = driver.find_element(By.TAG_NAME, 'video').get_attribute('src')
                     self.video_url.append(video)
