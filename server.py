@@ -32,17 +32,25 @@ def save_feed():
     # 영상 데이터 DB 추가
     new_video_url = [x for x in video_urls if x not in result_url]
     insert_video_sql = 'insert into insta_feed(created_At, file_url, writer) values (%s, %s, %s)'
-    cur.execute(insert_video_sql, (video_date, new_video_url, video_writer))
+    # 8개
+    for x in range(len(video_date) - len(new_video_url), len(video_date)):
+        print((video_date[x], video_urls[x], video_writer[x]))
+        print("---------------------------------")
+        cur.execute(insert_video_sql, (video_date[x], video_urls[x], video_writer[x]))
     db.commit()
     print(2)
 
     # 사진 데이터 DB 추가
     new_img_url = [x for x in img_urls if x not in result_url]
     insert_img_url = 'insert into insta_feed(created_At, file_url, writer) values (%s, %s, %s)'
-    cur.execute(insert_img_url, (img_writer, new_img_url, img_date))
+
+    for x in range(len(img_date) - len(new_img_url), len(img_date)):
+        print((img_date[x], img_urls[x], img_writer[x]))
+        print("---------------------------------")
+        cur.execute(insert_img_url, (img_date[x], img_urls[x], img_writer[x]))
     db.commit()
-    print(len(img_writer), len(new_img_url), len(img_date))
     db.close()
+    return 'hello'
 
 if __name__ == '__main__':
     from waitress import serve
