@@ -15,7 +15,8 @@ class InstaCrawling:
         self.img_url = []
         self.video_date = []
         self.img_date = []
-        self.writer = []
+        self.img_writer = []
+        self.video_writer = []
 
     def crawling(self):
         driver = wb.Safari()
@@ -92,8 +93,8 @@ class InstaCrawling:
                             date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
                             self.video_date.append(date)
 
-                            writer_id = driver.find_element(By.CLASS_NAME, '/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
-                            self.writer.append(writer_id)
+                            writer_id = driver.find_element(By.CSS_SELECTOR, 'div> span > div > div > a').text
+                            self.video_writer.append(writer_id)
                         except:
                             img = driver.find_element(By.TAG_NAME, 'img').get_attribute('src')
                             self.img_url.append(img)
@@ -101,8 +102,8 @@ class InstaCrawling:
                             date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
                             self.img_date.append(date)
 
-                            writer_id = driver.find_element(By.CLASS_NAME, '/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
-                            self.writer.append(writer_id)
+                            writer_id = driver.find_element(By.CSS_SELECTOR, 'div> span > div > div > a').text
+                            self.img_writer.append(writer_id)
                         next_btn.click()
                         time.sleep(1)
 
@@ -119,8 +120,8 @@ class InstaCrawling:
                     date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
                     self.video_date.append(date)
 
-                    writer_id = driver.find_element(By.CLASS_NAME,'/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
-                    self.writer.append(writer_id)
+                    writer_id = driver.find_element(By.CSS_SELECTOR, 'div> span > div > div > a').text
+                    self.video_writer.append(writer_id)
                 except:
                     img = driver.find_element(By.TAG_NAME, 'img').get_attribute('src')
                     self.img_url.append(img)
@@ -128,13 +129,13 @@ class InstaCrawling:
                     date = driver.find_element(By.CLASS_NAME, '_aaqe').get_attribute('title')
                     self.img_date.append(date)
 
-                    writer_id = driver.find_element(By.CLASS_NAME,'/html/body/div[5]/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[2]/div/div/div[1]/div/header/div[2]/div[1]/div[1]/div/div/span/div/div/a').text
-                    self.writer.append(writer_id)
+                    writer_id = driver.find_element(By.CSS_SELECTOR, 'div> span > div > div > a').text
+                    self.img_writer.append(writer_id)
                 time.sleep(2)
                 driver.back()
 
         driver.quit()
 
-        return self.img_url, self.video_url, self.img_date, self.video_date, self.writer
+        return self.img_url, self.video_url, self.img_date, self.video_date, self.img_writer, self.video_writer
 
         
